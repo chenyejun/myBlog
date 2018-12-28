@@ -1,1 +1,6 @@
-大家的看法
+---
+home: true
+heroImage: /logo.ico
+heroText: 吃饭@我
+tagline: ' '
+---
