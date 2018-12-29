@@ -31,12 +31,19 @@ module.exports = {
           ]
         },
         {
-          title: 'js',
+          title: 'mongoDB',
           collapsable: true,
           children: [
-            ['/blog/js/入门', '入门']
+            ['/blog/mongoDB/windows安装mongodb', 'windows安装mongodb']
           ]
         },
+        // {
+        //   title: 'js',
+        //   collapsable: true,
+        //   children: [
+        //     ['/blog/js/入门', '入门']
+        //   ]
+        // },
         ['/blog/JigsawGame', '自定义上传图片拼图游戏']
       ],
       // 展示bote路径下的md

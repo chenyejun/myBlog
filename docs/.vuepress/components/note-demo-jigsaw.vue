@@ -3,8 +3,8 @@
 		<input type="file" class="hide" id="file">
 		<button class="btn" id="uploadFile">上传图片</button>
 		<button class="btn" id="disrupt">打乱顺序</button>
-		<section class='jigsaw'>
-			<ul class="ul">
+		<section class='jigsaw highlight'>
+			<ul class="ul highlight">
 				<li class="child" data-x='1' data-y='1' style="order:1">1</li>
 				<li class="child" data-x='2' data-y='1' style="order:2">2</li>
 				<li class="child" data-x='3' data-y='1' style="order:3">3</li>
@@ -173,10 +173,22 @@ export default {
 };
 </script>
 <style lang="css">
+html,body {
+	-webkit-overflow-scrolling : touch;/*解决ios滚动卡慢*/
+	-webkit-tap-highlight-color:rgba(0,0,0,0);/*解决部分安卓手机点击有闪亮*/
+	-webkit-text-size-adjust: 100%;
+	
+	/*优化显示文本*/
+	-moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
 #jigsaw {
 	padding: 15px;
     box-sizing: border-box;
 }
+
+#jigsaw .highlight{-webkit-tap-highlight-color:transparent;}
 
 #jigsaw #img {
     margin: 15px 0 0 1%;

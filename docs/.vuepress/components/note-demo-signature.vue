@@ -26,64 +26,64 @@ export default {
     }
   },
   mounted () {
-  	this.init();
+  	this.$nextTick(()=>{
+  		this.init();
+  	});
   },
   methods: {
   	init () {
-  	 	window.onload = function() {
-            var signature = new Signature({
-                el: document.getElementById('canvas'), //绘制canvas的父级div
-                color: 'red',
-                lineWidth: 3
-            });
+  	 	var signature = new Signature({
+            el: document.getElementById('canvas'), //绘制canvas的父级div
+            color: 'red',
+            lineWidth: 3
+        });
 
-            var oClearCanvas = document.getElementById('clearCanvas');
-            var oSaveCanvas = document.getElementById('saveCanvas');
-            var oPrevious = document.getElementById('previous');
-            var oEraser = document.getElementById('eraser');
-            var oLineWidthInput = document.getElementById('lineWidthInput');
-            var oModifyLineWidth = document.getElementById('modifyLineWidth');
-            var oColorInput = document.getElementById('colorInput');
-            var oModifyColor = document.getElementById('modifyColor');
+        var oClearCanvas = document.getElementById('clearCanvas');
+        var oSaveCanvas = document.getElementById('saveCanvas');
+        var oPrevious = document.getElementById('previous');
+        var oEraser = document.getElementById('eraser');
+        var oLineWidthInput = document.getElementById('lineWidthInput');
+        var oModifyLineWidth = document.getElementById('modifyLineWidth');
+        var oColorInput = document.getElementById('colorInput');
+        var oModifyColor = document.getElementById('modifyColor');
 
-            // 清除画布
-            oClearCanvas.onclick = function () {
-                signature.clear();
+        // 清除画布
+        oClearCanvas.onclick = function () {
+            signature.clear();
+        }
+        oSaveCanvas.onclick = function () {
+            var base64 = signature.save();
+            document.getElementById('img').setAttribute('src', base64);
+        }
+        // 返回上一步
+        oPrevious.onclick = function () {
+            signature.previous();
+        }
+        // 橡皮檫切换
+        oEraser.onclick = function () {
+            var value=this.getAttribute('value');
+            if(value=='0'){
+                this.setAttribute('value', '1');
+                this.style.backgroundColor='yellow';
+            }else{
+                this.setAttribute('value', '0');
+                this.style.backgroundColor='#4F94CD';
             }
-            oSaveCanvas.onclick = function () {
-                var base64 = signature.save();
-                document.getElementById('img').setAttribute('src', base64);
-            }
-            // 返回上一步
-            oPrevious.onclick = function () {
-                signature.previous();
-            }
-            // 橡皮檫切换
-            oEraser.onclick = function () {
-                var value=this.getAttribute('value');
-                if(value=='0'){
-                    this.setAttribute('value', '1');
-                    this.style.backgroundColor='yellow';
-                }else{
-                    this.setAttribute('value', '0');
-                    this.style.backgroundColor='#4F94CD';
-                }
-                // value为0: 橡皮檫
-                // value为1: 画笔
-                signature.eraser(value);
-            }
-            // 修改笔触大小：
-            oModifyLineWidth.addEventListener('click', function(){
-                var val = Number(oLineWidthInput.value);
-                 if (val) {
-                    signature.modifyLineWidth(val);
-                 }
-            }, false);
-            // 修改笔触颜色：
-            oModifyColor.addEventListener('click', function(){
-                signature.modifyColor(oColorInput.value);
-            }, false);
-        };
+            // value为0: 橡皮檫
+            // value为1: 画笔
+            signature.eraser(value);
+        }
+        // 修改笔触大小：
+        oModifyLineWidth.addEventListener('click', function(){
+            var val = Number(oLineWidthInput.value);
+             if (val) {
+                signature.modifyLineWidth(val);
+             }
+        }, false);
+        // 修改笔触颜色：
+        oModifyColor.addEventListener('click', function(){
+            signature.modifyColor(oColorInput.value);
+        }, false);
 
         function Signature(obj) {
 		    if (!obj || !obj.el) {
@@ -115,7 +115,12 @@ export default {
 		    //开始绘制
 		    this.canvas.addEventListener('touchstart', function(e) {
 		        this.previousPoint = [];
-		        this.previousPoint.push({'event':e,'state':this.state});
+		        this.previousPoint.push({
+		            'event': e, 
+		            'state': this.state,
+		            'lineWidth': this.lineWidth,
+		            'color': this.color
+		        });
 		        this.cxt.beginPath();
 		        e.preventDefault();
 		        // 减去canvas外层的offsetLeft，因为pageX是相对与屏幕边界的距离，如果外层包裹元素有padding，会导致画笔中心偏移
@@ -123,7 +128,12 @@ export default {
 		    }.bind(this), false);
 		    //绘制中
 		    this.canvas.addEventListener('touchmove', function(e) {
-		        this.previousPoint.push({'event':e,'state':this.state});
+		        this.previousPoint.push({
+		            'event': e, 
+		            'state': this.state,
+		            'lineWidth': this.lineWidth,
+		            'color': this.color
+		        });
 		        this.cxt.lineTo(e.changedTouches[0].pageX - this.offsetLeft, e.changedTouches[0].pageY - this.offsetTop);
 		        this.cxt.stroke();
 		    }.bind(this), false);
@@ -135,19 +145,20 @@ export default {
 
 		    //清除画布
 		    this.clear = function () {
-		        this.cxt.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		        // 清空纪录，清除画布
+		        this.recordList.length = 0;
+		        this.cxt.fillRect(0, 0, this.canvas.width, this.canvas.height);
 		    }
 		    //保存图片，直接转base64
 		    this.save = function () {
 		        var imgBase64 = this.canvas.toDataURL();
-		        console.log(imgBase64);
 		        return imgBase64
 		    }
 		    // 上一步
 		    this.previous = function () {
-		        this.clear();
+		        // 清除画布
+		        this.cxt.fillRect(0, 0, this.canvas.width, this.canvas.height);
 		        this.recordList.pop();
-		        console.log(this.recordList);
 		        this.resetCanvas();
 		    }
 
@@ -155,9 +166,17 @@ export default {
 
 		// 利用坐标点重新绘制
 		Signature.prototype.resetCanvas=function(){
-		     for (var i = 0; i < this.recordList.length; i++) {
-		            this.draw(this.recordList[i]);
-		        }
+		    // 保存当前橡皮檫状态、笔触大小和颜色，因为draw方法会改变strokeStyle和lineWidth
+		    let state = this.state;
+		    let lineWidth = this.lineWidth;
+		    let color = this.color;
+		    for (var i = 0; i < this.recordList.length; i++) {
+		        this.draw(this.recordList[i]);
+		    }
+		    // 恢复橡皮檫状态、笔触大小和颜色
+		    this.eraser(state);
+		    this.modifyLineWidth(lineWidth);
+		    this.modifyColor(color);
 		}
 
 		Signature.prototype.draw=function(pointArr){
@@ -166,6 +185,8 @@ export default {
 		    this.cxt.moveTo(pointArr[0].event.changedTouches[0].pageX - this.offsetLeft, pointArr[0].event.changedTouches[0].pageY - this.offsetTop);
 		    for(var i = 1; i < pointArr.length; i++) { 
 		        this.isState(pointArr[i].state);
+		        this.modifyLineWidth(pointArr[i].lineWidth);
+		        this.modifyColor(pointArr[i].color);
 		        this.cxt.lineTo(pointArr[i].event.changedTouches[0].pageX - this.offsetLeft, pointArr[i].event.changedTouches[0].pageY - this.offsetTop);
 		        this.cxt.stroke();
 		    }
@@ -204,12 +225,16 @@ export default {
 		    this.cxt.strokeStyle = color;
 		}
 
+
   	}
 
   }
 };
 </script>
 <style lang="css">
+body {
+	cursor: pointer;
+}
 #myCanvas {
     padding: 10px;
     font-size: 14px;

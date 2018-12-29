@@ -12,7 +12,7 @@
 
 #### 3. 实现过程，代码分析
 1. flex实现九宫格布局：
-```
+```javascript
 <style>
   .jigsaw {
     margin-top: 15px;
@@ -47,7 +47,7 @@
 ![image](https://note.youdao.com/yws/api/personal/file/E90D977A12364AD7828493130A43D0DF?method=download&shareKey=6e3fe53b7d557cf9f4f02f35dadd8fa0)
 3. 分析：每个li代表一个格子，自定义属性data-x和data-y代表坐标(x, y)；而样式order用于对格子进行移动排序；格子9添加id='empty'用于标识为空白格子。
 4. 因为格子的宽度是通过百分比设置的，会根据不同屏幕宽度的变化而变化；而且我们需要正方形的小格子，所以格子的高度需要js动态计算：
-```
+```javascript
 // 设置格子的高度、背景图片的尺寸
 setChildStyle() {
   this.childWidth = window.getComputedStyle(this.oChild[0], false).width; // 获取格子宽度
@@ -61,7 +61,7 @@ setChildStyle() {
 
 ![image](https://note.youdao.com/yws/api/personal/file/B54851A8674043FAAD84DD21A13C76B9?method=download&shareKey=17225e079853f454ae7769df2bd80765)
 6. 现在给每个格子设置背景图片的尺寸（background-size），将格子的background-size的宽度设置成格子父节点ul的宽度，高度为auto，然后通过backgound-position进行定位，用格子的背景拼凑成一张完整的图片
-```
+```javascript
 setChildStyle() {
   this.childWidth = window.getComputedStyle(this.oChild[0], false).width;
   console.log(this.childWidth);
@@ -74,7 +74,7 @@ setChildStyle() {
 ```
 
 7. 其实每个格子的背景图片都是同一张，只不过是通过background-position 对背景图片进行定位，让每个格子只显示图片背景的九分之一，
-```
+```javascript
 // 设置背景图在格子的位置
 setBgpositon(chiObj) {
   let x = chiObj.getAttribute('data-x') - 1;
@@ -86,7 +86,7 @@ setBgpositon(chiObj) {
 ![image](https://note.youdao.com/yws/api/personal/file/FD88F82036644EABBF2464869E9E4836?method=download&shareKey=e886829b55cc3883ec63d42817f1c324)
 
 8. 设置默认背景图片后：
-```
+```javascript
 // 设置格子的背景图片
 setBgImg(imgUrl) {
   for (let i = 0; i < this.oChild.length - 1; i++) {
@@ -97,7 +97,7 @@ setBgImg(imgUrl) {
 ![image](https://note.youdao.com/yws/api/personal/file/F28AF40EDE0F400AA5460DB6DD45AD11?method=download&shareKey=07162daa6237872246dee59154f1dfb6)
 
 9. 接下来把格子撸成可移动的，与空白格子直接相邻的格子都可以与空白格子换位，一开始的order样式就起作用了。点击格子，首先比较该格子是否与空白格子直接相邻，如果是就交换格子的data-x、data-y和order值进行换位：
-```
+```javascript
 childEvent() {
   let that = this;
   let oEmptyChild = document.getElementById('empty'); // 获取空白的格子对象
@@ -129,7 +129,7 @@ childEvent() {
 }
 ```
 10. 接下来是把上传的img图片设置成格子背景，通过监听input type='file'的change事件来获取图片文件files：
-```
+```javascript
 imgEvent() {
   let that = this;
   this.oFile.addEventListener('change', function(){
