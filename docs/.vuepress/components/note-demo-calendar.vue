@@ -248,6 +248,9 @@ export default {
 };
 </script>
 <style lang="css">
+#calendar {
+	border: 1px solid #eee;
+}
 #calendar .header,.day_cont,.week_cont{
 	display:flex;
 	flex-wrap: wrap;

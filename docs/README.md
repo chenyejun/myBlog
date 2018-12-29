@@ -2,5 +2,6 @@
 home: true
 heroImage: /logo.ico
 heroText: 吃饭@我
-tagline: ' '
+actionText: Look
+actionLink: /blog/JigsawGame.html
 ---

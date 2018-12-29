@@ -15,8 +15,8 @@
 				<li class="child" data-x='2' data-y='3' style="order:8">8</li>
 				<li class="child" data-x='3' data-y='3' style="order:9" id='empty'>9</li>
 			</ul>
+			<img id="img" src="https://note.youdao.com/yws/api/personal/file/C69044B50F4F4B61B3B0851C7A0ECEE6?method=download&shareKey=6ef39c4f8117acac1b389fd17eeae3fc" alt="图片">
 		</section>
-		<img id="img" src="https://note.youdao.com/yws/api/personal/file/C69044B50F4F4B61B3B0851C7A0ECEE6?method=download&shareKey=6ef39c4f8117acac1b389fd17eeae3fc" alt="图片">
 	</div>
 </template>
 <script>
@@ -179,8 +179,8 @@ export default {
 }
 
 #jigsaw #img {
-    margin-top: 15px;
-    width: 50%;
+    margin: 15px 0 0 1%;
+    width: 49%;
  }
 #jigsaw li {
 	list-style: none;
@@ -208,8 +208,9 @@ export default {
 #jigsaw .jigsaw .ul{
 	display: flex;
 	flex-wrap: wrap;
-	width: 50%;
+	width: 49%;
 	padding-left: 0;
+	float: left;
 }
 
 #jigsaw .ul .child {
