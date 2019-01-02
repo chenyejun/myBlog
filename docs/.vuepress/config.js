@@ -31,20 +31,31 @@ module.exports = {
           ]
         },
         {
+          title: 'js',
+          collapsable: true,
+          children: [
+            ['/blog/js/ajax与history实现无刷新修改url', 'ajax与history实现无刷新修改url']
+          ]
+        },
+        {
+          title: 'nodejs',
+          collapsable: true,
+          children: [
+            ['/blog/nodejs/express框架初识', 'express框架初识']
+          ]
+        },
+        {
           title: 'mongoDB',
           collapsable: true,
           children: [
-            ['/blog/mongoDB/windows安装mongodb', 'windows安装mongodb']
+            ['/blog/mongoDB/windows安装mongodb', 'windows安装mongodb'],
+            ['/blog/mongoDB/mongodb添加管理员和用户', 'mongodb添加管理员和用户'],
+            ['/blog/mongoDB/操作mongodb相关命令', '操作mongodb相关命令']
           ]
         },
-        // {
-        //   title: 'js',
-        //   collapsable: true,
-        //   children: [
-        //     ['/blog/js/入门', '入门']
-        //   ]
-        // },
-        ['/blog/JigsawGame', '自定义上传图片拼图游戏']
+        ['/blog/JigsawGame', '自定义上传图片拼图游戏'],
+        ['/blog/weixinJSDK', '微信本地调试js-sdk'],
+        ['/blog/base64图片编码大小与原图文件大小之间的联系', 'base64图片编码大小与原图文件大小之间的联系']
       ],
       // 展示bote路径下的md
       '/note/': [
@@ -61,7 +72,15 @@ module.exports = {
           title: 'css',
           collapsable: true,
           children: [
-            ['/note/css/css', 'css相关']
+            ['/note/css/css', 'css相关'],
+            ['/note/css/圣杯布局', '圣杯布局']
+          ]
+        },
+        {
+          title: 'js',
+          collapsable: true,
+          children: [
+            ['/note/js/百度地图api获取两坐标距离', '百度地图api获取两坐标距离']
           ]
         },
         {
@@ -91,6 +110,14 @@ module.exports = {
           collapsable: true,
           children: [
             ['/note/nginx/nginx命令', 'nginx基础命令']
+          ]
+        },
+        {
+          title: '开发过程遇到的一些坑',
+          collapsable: true,
+          children: [
+            ['/note/somePit/一些浅坑', '一些浅坑'],
+            ['/note/somePit/一些vue坑', '一些vue坑'],
           ]
         }
       ]

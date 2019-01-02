@@ -1,4 +1,4 @@
-```
+```js
 关闭nginx服务：
 方法一：运行命令： sudo brew services stop nginx
 方法二：运行命令： nginx -s stop

@@ -12,7 +12,7 @@
 
 #### 3. 实现过程，代码分析
 1. flex实现九宫格布局：
-```javascript
+```html
 <style>
   .jigsaw {
     margin-top: 15px;

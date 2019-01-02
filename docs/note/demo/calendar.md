@@ -1,7 +1,7 @@
 ### 日历：
 <note-demo-calendar />
 ### 源码：
-```javascript
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -218,11 +218,11 @@
 				showTime = _this.getClassSibling(clickTarget, 'show_time'),
 				showTimeVal;
 
-			if (clickTarget.className.indexOf('pre_btn') > -1 || clickTarget.className.indexOf('next_btn') > -1){
+			if (clickTarget.classList.contains('pre_btn') || clickTarget.classList.contains('next_btn')){
 				showTimeVal = showTime.innerText;
-				if (clickTarget.className.indexOf('pre_btn') > -1) {
+				if (clickTarget.classList.contains('pre_btn')) {
 					showTimeVal = parseInt(showTimeVal) - 1;
-				} else if (clickTarget.className.indexOf('next_btn') > -1) {
+				} else if (clickTarget.classList.contains('next_btn')) {
 					showTimeVal = parseInt(showTimeVal) + 1;
 				}
 				showTime.innerText = showTimeVal;
@@ -250,7 +250,7 @@
 				allDayClass = _this.oDayCont.querySelectorAll('.day_class');
 
 			// 点击切换选中日期
-			if (clickTarget.className.indexOf('day_class') > -1) {
+			if (clickTarget.classList.contains('day_class')) {
 				allDayClass.forEach(function(value, index) {
 					value.classList.remove("day_select");
 				});
@@ -269,14 +269,14 @@
 				_this.render();
 			}
 			// 点击灰色日期，跳转到上一个月或者下一个月
-			if (clickTarget.className.indexOf('pre_month') > -1) {
+			if (clickTarget.classList.contains('pre_month')) {
 				iMonthShowText--;
 				if (iMonthShowText < 1) {
 					iMonthShowText = 12;
 					iYearShowText--;
 				}
 				changeTime();
-			} else if (clickTarget.className.indexOf('next_month') > -1) {
+			} else if (clickTarget.classList.contains('next_month')) {
 				iMonthShowText++;
 				if (iMonthShowText > 12) {
 					iMonthShowText = 1;

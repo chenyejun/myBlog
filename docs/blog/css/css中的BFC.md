@@ -27,15 +27,13 @@ big news：
 
 #### 我们知道了BFC的规则和触发它的条件，下面举几个代码例子证明（下面的例子都使用overflow:hidden触发BFC）：
 一、我们都知道，当两个相邻块级元素都拥有margin-top和margin-bottom，他们的上下margin会发生重叠。
-```css
+```html
 <style>
-#BFC
-{
+#BFC {
     overflow:hidden;
 }
 
-#up,#down
-{
+#up,#down {
   height: 50px;
   width: 300px;
   background: #666;
@@ -43,10 +41,10 @@ big news：
 }
 </style>
 <body>
-    <div id='BFC'>
-        <div id="up"></div>
-        <div id="down"></div>
-    </div>
+  <div id='BFC'>
+    <div id="up"></div>
+    <div id="down"></div>
+  </div>
 </body>
 
 ```
@@ -57,30 +55,27 @@ big news：
 如果我们想让它们的margin不产生重叠呢？
 解决方法：我们可以通过把其中的一个div处在另外一个BFC下就可以了。
 
-```css
+```html
 <style>
-#BFC,#otherBFC
-{
+#BFC, #otherBFC {
     overflow:hidden;
 }
 
 
-#up,#down
-{
+#up, #down {
   height: 50px;
   width: 300px;
   background: #666;
   margin:15px;
 }
 </style>
-
 <body>
-    <div id='BFC'>
-        <div id="up"></div>
-        <div id="otherBFC">
-          <div id="down"></div>
-        </div>
+  <div id='BFC'>
+    <div id="up"></div>
+    <div id="otherBFC">
+      <div id="down"></div>
     </div>
+  </div>
 </body>
 
 ```
@@ -91,18 +86,16 @@ big news：
 
 二、BFC的区域不会与float box重叠
 当没有触发BFC时：
-```css
+```html
 <style>
-#float
-{
+#float {
   float: left;
   height: 100px;
   width: 100px;
   background: #666;
   opacity: 0.5;/*用于查看元素叠加部分*/
 }
-#cont
-{
+#cont {
   height: 50px;
   width: 300px;
   background: orange;
@@ -110,8 +103,8 @@ big news：
 </style>
 
 <body>
-    <div id="float"></div>
-    <div id="cont"></div>
+  <div id="float"></div>
+  <div id="cont"></div>
 </body>
 
 ```
@@ -122,8 +115,7 @@ big news：
 触发BFC后（在原有代码基础上添加overflow）：
 
 ```css
-#cont
-{
+#cont {
   height: 50px;
   width: 300px;
   background: orange;
@@ -139,15 +131,13 @@ big news：
 
 三、计算BFC的高度时，浮动元素也参与计算，这是解决浮动塌陷的一种方法
 当没有触发BFC的情况下，内部元素浮动会引起外部元素塌陷：
-```css
+```html
 <style>
-#outer
-{
+#outer {
   border: 5px solid orange;
 }
 
-#inner
-{
+#inner {
   float: left;
   
   height: 50px;
@@ -157,7 +147,7 @@ big news：
 </style>
 
 <body>
-    <div id="outer">
+  <div id="outer">
     <div id="inner"></div>
   </div>
 </body>
@@ -170,10 +160,8 @@ big news：
 触发BFC，解决塌陷问题：
 
 ```css
-#outer
-{
+#outer {
   border: 5px solid orange;
-  
   overflow:hidden;
 }
 ```

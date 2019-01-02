@@ -104,7 +104,7 @@ httpServer.listen(3001, function () {
 ```
 
 如果客户端网页是通过域名进行nginx代理访问的，需要配置nginx将socket.io的服务器端口暴露出去：
-```javascript
+```js
 server {
     listen       80;
     server_name baidu.com;
@@ -123,7 +123,6 @@ server {
 
 客户端访问：
 var socket = io.connect('http://baidu.com/');
-```
 ```
 
 
