@@ -1,6 +1,7 @@
 # myBlog
 
 目录结构：
+```
 --docs
   --.vuepress
   --components // vue组件，用于md页面引用
@@ -13,3 +14,4 @@
 --node_modules // 依赖
 --deploy.sh // 自动部署到github的脚本
 --package.json // webpack相关配置
+```
