@@ -122,5 +122,11 @@ module.exports = {
         }
       ]
     },
-  }
+  },
+  plugins: [
+    // 使用搜索插件，vuepress自带
+    ['@vuepress/search', {
+      searchMaxSuggestions: 10
+    }]
+  ]
 }

@@ -1,3 +1,4 @@
+# pm2基础命令
 ```js
 $ pm2 start app.js              # 启动app.js应用程序
 $ pm2 start app.js -i 4         # cluster mode 模式启动4个app.js的应用实例

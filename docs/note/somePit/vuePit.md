@@ -1,3 +1,4 @@
+# 一些vue坑
 1. this.$router.push({'path': '/', params: {}}); path 跳转路由，无法获取params，params需要配合name使用，this.$router.push({name:: '', params: {}})
 
 ---
