@@ -15,8 +15,8 @@ export default {
 };
 </script>
 <style>
-.sb-right-main{margin-left:300px; margin-top: 10px;}
+.sb-right-main{margin-left: 120px; margin-top: 10px;}
 .sb-right-main .right{width: 100%;background: #ccc;float: left;}
-.sb-right-main .left{width: 150px;float: left;margin-left: -100%;position: relative;left:-300px;background:  #3eaf7c;}
-.sb-right-main .center{width: 150px;float: left;margin-left: -100%;position: relative;left:-150px;background: #3eafcd;}
+.sb-right-main .left{width: 60px;float: left;margin-left: -100%;position: relative;left:-120px;background:  #3eaf7c;}
+.sb-right-main .center{width: 60px;float: left;margin-left: -100%;position: relative;left:-60px;background: #3eafcd;}
 </style>
